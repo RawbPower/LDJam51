@@ -9,6 +9,8 @@ public class Entity : MonoBehaviour
     public float frictionCoefficient;
     public bool instantStop;
 
+    private bool dashing = false;
+    private float dashTimer = 0.0f;
     private float speed;
     private Vector3 acceleration;
     private Vector3 velocity;
@@ -33,7 +35,16 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (dashTimer > 0)
+        {
+            dashing = true;
+            dashTimer -= Time.deltaTime;
+            if (dashTimer <= 0.0f)
+            {
+                dashTimer = 0.0f;
+                dashing = false;
+            }
+        }
     }
 
     public void SetVelocity(Vector2 setVel)
@@ -41,7 +52,16 @@ public class Entity : MonoBehaviour
         velocity = setVel;
     }
 
-        public void Move(Vector2 movementInput)
+    public Vector2 GetVelocity() { return velocity; }
+
+    public void Dash(Vector2 dashVelocity, float dashTime)
+    {
+        velocity = dashVelocity;
+        dashTimer = dashTime;
+        dashing = true;
+    }
+
+    public void Move(Vector2 movementInput)
     {
         // Movement
         acceleration = new Vector3(accelerationMag * movementInput.x, accelerationMag * movementInput.y, 0.0f);
@@ -50,22 +70,25 @@ public class Entity : MonoBehaviour
 
         speed = velocity.magnitude;
 
-        if (speed > 0.0f && movementInput.x == 0.0f && movementInput.y == 0.0f)
+        if (!dashing)
         {
-            if (instantStop)
+            if (speed > 0.0f && movementInput.x == 0.0f && movementInput.y == 0.0f)
             {
-                velocity = Vector2.zero;
+                if (instantStop)
+                {
+                    velocity = Vector2.zero;
+                }
+                else
+                {
+                    velocity -= Mathf.Min(velocity.magnitude, frictionCoefficient) * velocity.normalized;
+                }
             }
-            else
-            {
-                velocity -= Mathf.Min(velocity.magnitude, frictionCoefficient) * velocity.normalized;
-            }
-        }
 
-        if (speed > maxSpeed)
-        {
-            velocity = (velocity / speed) * maxSpeed;
-            speed = maxSpeed;
+            if (speed > maxSpeed)
+            {
+                velocity = (velocity / speed) * maxSpeed;
+                speed = maxSpeed;
+            }
         }
         if (speed < 0.2f)
         {

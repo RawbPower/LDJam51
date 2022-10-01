@@ -6,7 +6,10 @@ public class MeleeWeapon : Weapon
 {
     public float attackRate;
     public int damage;
+    public float knockback;
     public Hitbox hitbox;
+    public CircleCollider2D slashScan;
+    public LayerMask hitMask;
 
     private Animator animator;
 

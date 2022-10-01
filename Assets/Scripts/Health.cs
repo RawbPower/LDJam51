@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
     public int maxHealth;
     public int startHealth = -1;
 
+    public ParticleSystem bloodParticle;
+
     private int currentHealth;
 
     // Start is called before the first frame update
@@ -50,8 +52,15 @@ public class Health : MonoBehaviour
             }
             else
             {
-                FindObjectOfType<EnemyManager>().OnEnemyDied();
-                Destroy(gameObject);
+                AIAgent agent = GetComponent<AIAgent>();
+                if (agent != null)
+                {
+                    agent.PlayDeathAnimation();
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

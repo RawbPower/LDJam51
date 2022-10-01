@@ -11,6 +11,7 @@ public class PlayerCombat : MonoBehaviour
     public Slider UISlider;
     public Transform arrow;
     public Vector2 dashLimits;
+    public float dashSpeed;
     public float fullChargeTime;
     public CameraFollow cam;
 
@@ -19,6 +20,7 @@ public class PlayerCombat : MonoBehaviour
     private bool charging;
     private bool chargingForward;
     private bool dashing;
+    private bool slashing;
     private bool fireDown = false;
     private bool fireReleased = false;
     private bool gameEnded = false;
@@ -26,6 +28,7 @@ public class PlayerCombat : MonoBehaviour
     private PlayerController controller;
     private Animator animator;
     private WeaponManager weaponManager;
+    private Entity entity;
 
     // Start is called before the first frame update
     void Start()
@@ -33,10 +36,12 @@ public class PlayerCombat : MonoBehaviour
         animator = GetComponent<Animator>();
         controller = GetComponent<PlayerController>();
         weaponManager = GetComponent<WeaponManager>();
+        entity = GetComponent<Entity>();
 
         charging = false;
         chargingForward = true;
         dashing = false;
+        slashing = false;
         chargeTimer = 0.0f;
     }
 
@@ -95,6 +100,29 @@ public class PlayerCombat : MonoBehaviour
                 ReleaseAttack();
                 fireReleased = false;
             }
+
+            Weapon weapon = weaponManager.GetEquipedWeapon();
+            if (dashing && !slashing && weapon is MeleeWeapon)
+            {
+                MeleeWeapon sword = weapon as MeleeWeapon;
+                CircleCollider2D slashCollider = sword.slashScan;
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, slashCollider.radius, sword.hitMask);
+
+                foreach (Collider2D colldier in colliders)
+                {
+                    if (!colldier.gameObject.CompareTag("Player"))
+                    {
+                        AIAgent enemy = colldier.transform.parent.gameObject.GetComponent<AIAgent>();
+                        if (!enemy || !enemy.IsDead())
+                        {
+                            Vector2 direction = entity.GetVelocity();
+                            direction.Normalize();
+                            StartCoroutine(Slash(direction));
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -110,22 +138,36 @@ public class PlayerCombat : MonoBehaviour
     {
         charging = false;
         dashing = true;
-        animator.SetBool("Charge", false);
-        animator.SetBool("Slash", true);
+        StartCoroutine(Dash());
+    }
+
+    IEnumerator Dash()
+    {
         slowMo.ResumeNormalSpeed();
         Vector2 aimDir = controller.GetAimDirection();
         //GetComponent<SpriteRenderer>().color = Color.white;
-        float dashSpeed = dashLimits.x + chargeRatio * (dashLimits.y - dashLimits.x);
-        GetComponent<Entity>().SetVelocity(aimDir * dashSpeed);
-        StartCoroutine(DashSlash(aimDir));
+        float dashDistance = dashLimits.x + chargeRatio * (dashLimits.y - dashLimits.x);
+        float dashTime = dashDistance / dashSpeed;
+        GetComponent<Entity>().Dash(aimDir * dashSpeed, dashTime);
+        float slashTime = dashTime - 0.1f;
+        slashTime = Mathf.Max(0.0f, slashTime);
+        yield return new WaitForSeconds(slashTime);
+        if (!slashing )
+        {
+            StartCoroutine(Slash(aimDir));
+        }
     }
 
-    IEnumerator DashSlash(Vector2 aimDir)
+    IEnumerator Slash(Vector2 aimDir)
     {
+        slashing = true;
+        animator.SetBool("Charge", false);
+        animator.SetBool("Slash", true);
         weaponManager.GetEquipedWeapon().Attack(aimDir);
         yield return new WaitForSeconds(weaponManager.GetEquipedWeapon().GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.2f);
         animator.SetBool("Slash", false);
         dashing = false;
+        slashing = false;
     }
 
     public void PlayDeathAnimation()
@@ -139,13 +181,17 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator OnDead()
     {
         gameEnded = true;
+        Destroy(weaponManager.GetEquipedWeapon().gameObject);
+        Destroy(arrow.gameObject);
         slowMo.DoSlowMo();
+        cam.GetComponent<CameraFollow>().enabled = true;
         cam.GetComponent<PixelPerfectCamera>().refResolutionX = (int)(cam.GetComponent<PixelPerfectCamera>().refResolutionX * 0.5f);
         cam.GetComponent<PixelPerfectCamera>().refResolutionY = (int)(cam.GetComponent<PixelPerfectCamera>().refResolutionY * 0.5f);
         animator.SetTrigger("Dead");
-        yield return new WaitForSecondsRealtime(1.0f);
+        yield return new WaitForSecondsRealtime(1.5f);
         GetComponent<SpriteRenderer>().enabled = false;
-        yield return new WaitForSecondsRealtime(1.0f);
+        entity.SetVelocity(Vector2.zero);
+        yield return new WaitForSecondsRealtime(0.7f);
         //yield return new WaitForSecondsRealtime(100.0f);
         FindObjectOfType<GameManager>().LoseGame();
         Destroy(gameObject);
@@ -191,5 +237,10 @@ public class PlayerCombat : MonoBehaviour
             bool cycleBack = cycleDirection < 0;
             weaponManager.CycleWeapon(cycleBack);
         }
+    }
+
+    public bool HasGameEnded()
+    {
+        return gameEnded;
     }
 }

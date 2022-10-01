@@ -8,6 +8,7 @@ public class AIAgent : MonoBehaviour
     // Distance from target to start attacking instead of pursuing
     public float attackDistance;
     public float shootingDistance;
+    public SpriteRenderer gunSprite;
 
     // Agro Zones
     public AlertArea alertArea;
@@ -20,12 +21,16 @@ public class AIAgent : MonoBehaviour
     public float cooldown = 1.0f;
     public float initalShotDelay = 0.0f;
 
+    public ParticleSystem bloodParticle;
+
     [HideInInspector]
     public float cooldownCounter;
 
+    private bool dead = false;
     private GameObject _target;
     private EnemyStateMachine _enemyFSM;
     private WeaponManager weaponManager;
+    private Animator animator;
 
     [HideInInspector] public PathfindingAgent pathfindingAgent;
 
@@ -43,6 +48,7 @@ public class AIAgent : MonoBehaviour
         _enemyFSM = new EnemyStateMachine(this);
         pathfindingAgent = gameObject.GetComponent<PathfindingAgent>();
         weaponManager = GetComponent<WeaponManager>();
+        animator = GetComponent<Animator>();
 
         cooldownCounter = initalShotDelay;
     }
@@ -58,19 +64,34 @@ public class AIAgent : MonoBehaviour
 
     private void Update()
     {
-        if (cooldownCounter > 0.0f)
+        if (!dead)
         {
-            cooldownCounter -= Time.deltaTime;
-        }
-        else
-        {
-            cooldownCounter = 0.0f;
+            if (cooldownCounter > 0.0f)
+            {
+                cooldownCounter -= Time.deltaTime;
+            }
+            else
+            {
+                cooldownCounter = 0.0f;
+            }
+
+            if (GetTarget() != null)
+            {
+                Vector2 aimDir = GetTarget().transform.position - _entity.transform.position;
+                aimDir.Normalize();
+                float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+                gunSprite.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        UpdateAgent();
+        if (!dead)
+        {
+            UpdateAgent();
+        }
+        _entity.Move(Vector2.zero);
     }
 
     // Update agent AI (can be called in this classes Update or in another one the AI owns)
@@ -85,4 +106,41 @@ public class AIAgent : MonoBehaviour
         aimDir.Normalize();
         weaponManager.GetEquipedWeapon().Attack(aimDir);
     }
+
+    public void PlayDeathAnimation()
+    {
+        if (!dead)
+        {
+            StartCoroutine(OnDead());
+        }
+    }
+
+    IEnumerator OnDead()
+    {
+        dead = true;
+        Collider2D[] hitboxes = GetComponentsInChildren<Collider2D>();
+        foreach (Collider2D hitbox in hitboxes)
+        {
+            if (hitbox.gameObject.layer == LayerMask.NameToLayer("HitBox"))
+            {
+                hitbox.gameObject.SetActive(false);
+            }
+        }
+        FindObjectOfType<EnemyManager>().OnEnemyDied();
+        animator.SetBool("Hit", true);
+        yield return new WaitForSecondsRealtime(0.3f);
+        animator.SetBool("Hit", false);
+        animator.SetBool("Death", true);
+        if (bloodParticle != null)
+        {
+            Instantiate(bloodParticle.gameObject, transform.position, Quaternion.identity);
+        }
+        yield return new WaitForSecondsRealtime(0.2f);
+        if (bloodParticle != null)
+        {
+            Instantiate(bloodParticle.gameObject, transform.position, Quaternion.identity);
+        }
+    }
+
+    public bool IsDead() { return dead; }
 }
