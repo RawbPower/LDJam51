@@ -64,14 +64,14 @@ public class Entity : MonoBehaviour
     public void Move(Vector2 movementInput)
     {
         // Movement
-        acceleration = new Vector3(accelerationMag * movementInput.x, accelerationMag * movementInput.y, 0.0f);
-
-        velocity += acceleration * Time.deltaTime;
-
-        speed = velocity.magnitude;
-
         if (!dashing)
         {
+            acceleration = new Vector3(accelerationMag * movementInput.x, accelerationMag * movementInput.y, 0.0f);
+
+            velocity += acceleration * Time.deltaTime;
+
+            speed = velocity.magnitude;
+
             if (speed > 0.0f && movementInput.x == 0.0f && movementInput.y == 0.0f)
             {
                 if (instantStop)
@@ -89,11 +89,12 @@ public class Entity : MonoBehaviour
                 velocity = (velocity / speed) * maxSpeed;
                 speed = maxSpeed;
             }
-        }
-        if (speed < 0.2f)
-        {
-            velocity = Vector3.zero;
-            speed = 0.0f;
+
+            if (speed < 0.2f)
+            {
+                velocity = Vector3.zero;
+                speed = 0.0f;
+            }
         }
 
         if (animator)
