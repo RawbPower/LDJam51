@@ -12,13 +12,17 @@ public class GunWeapon : Weapon
     public float fireRate;
     public int maxAmmo;
     public int startAmmo = -1;
+    public int clipSize = 1;
+    public float spray;
 
     private int currentAmmo;
+    private int currentClip;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         hasAmmo = true;
+        currentClip = clipSize;
         currentAmmo = maxAmmo;
         if (startAmmo >= 0)
         {
@@ -34,10 +38,27 @@ public class GunWeapon : Weapon
         Shoot(aimDir);
     }
 
+    public void Reload()
+    {
+        currentClip = clipSize;
+    }
+
+    public int GetCurrentClip()
+    {
+        return currentClip;
+    }
+
     public void Shoot(Vector2 aimDir)
     {
+
         if (base.cooldown <= 0.0f && currentAmmo > 0)
         {
+            if (currentClip <= 0)
+            {
+                Reload();
+                return;
+            }
+
             switch (shotType)
             {
                 case ShotType.Single:
@@ -55,12 +76,16 @@ public class GunWeapon : Weapon
             {
                 base.cooldown = 1.0f / fireRate;
             }
+
+            currentClip--;
         }
     }
 
     IEnumerator SingleShot(Vector2 aimDir)
     {
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg - 90.0f;        // -90 degree offset due to original direction being 90 degrees from x axis
+        float sprayAngle = Random.Range(-spray, spray);
+        Vector2 rotatedAimDir = Quaternion.Euler(0.0f, 0.0f, sprayAngle) * aimDir;
         Vector2 bulletPosition = new Vector2(transform.position.x, transform.position.y) + 1.2f * aimDir;
         Quaternion bulletRotation = Quaternion.Euler(0.0f, 0.0f, angle);
         Vector2 flashPosition = new Vector2(transform.position.x, transform.position.y) + 0.5f * aimDir;
@@ -68,7 +93,7 @@ public class GunWeapon : Weapon
         yield return new WaitForSeconds(0.15f);
         GameObject bulletObject = Instantiate(bulletPrefab, bulletPosition, bulletRotation);
         Bullet bullet = bulletObject.GetComponent<Bullet>();
-        bullet.SetInitialDirection(aimDir);
+        bullet.SetInitialDirection(rotatedAimDir);
         ReduceAmmo(1);
     }
 

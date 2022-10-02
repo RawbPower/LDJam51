@@ -31,7 +31,15 @@ public class AttackEnemyState : EnemyState
         if (_agent.cooldownCounter <= 0.0f)
         {
             _agent.Attack();
-            _agent.cooldownCounter = _agent.cooldown;
+            GunWeapon gun = _agent.GetGun();
+            if (gun != null && gun.GetCurrentClip() <= 0)
+            {
+                _agent.cooldownCounter = _agent.cooldown;
+            }
+            else if (gun == null)
+            {
+                _agent.cooldownCounter = _agent.cooldown;
+            }
         }
     }
     public override void OnEnterState() 

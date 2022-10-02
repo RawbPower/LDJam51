@@ -142,5 +142,18 @@ public class AIAgent : MonoBehaviour
         }
     }
 
+    public GunWeapon GetGun()
+    {
+        if (weaponManager.GetEquipedWeapon() is GunWeapon)
+        {
+            GunWeapon gun = weaponManager.GetEquipedWeapon() as GunWeapon;
+            return gun;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public bool IsDead() { return dead; }
 }

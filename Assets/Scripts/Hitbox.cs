@@ -20,6 +20,7 @@ public class Hitbox : MonoBehaviour
         GameObject hitObject = collision.transform.parent.gameObject;
         Health health = hitObject.GetComponent<Health>();
         PlayerCombat player = hitObject.GetComponent<PlayerCombat>();
+        Decoration decoration = hitObject.GetComponent<Decoration>();
         GameObject damageSource = transform.parent.gameObject;
         Bullet bullet = damageSource.GetComponent<Bullet>();
 
@@ -33,6 +34,11 @@ public class Hitbox : MonoBehaviour
             return;
         }
 
+        if (decoration != null)
+        {
+            decoration.OnChopDecoration();
+        }
+
         Vector2 hitDirection = Vector2.zero;
 
         if (bullet != null)
@@ -42,6 +48,18 @@ public class Hitbox : MonoBehaviour
             {
                 hitDirection = bullet.GetVelocity().normalized;
                 hitEntity.SetVelocity(hitDirection * bullet.knockback);
+            }
+        }
+
+        Hazard hazard = damageSource.GetComponent<Hazard>();
+        if (hazard != null)
+        {
+            Entity hitEntity = hitObject.GetComponent<Entity>();
+            if (hitEntity != null)
+            {
+                hitDirection = hitObject.transform.position - damageSource.transform.position;
+                hitDirection.Normalize();
+                hitEntity.SetVelocity(hitDirection * hazard.knockback);
             }
         }
 

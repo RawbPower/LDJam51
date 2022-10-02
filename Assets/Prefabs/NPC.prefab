@@ -625,7 +625,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 238904412954264408, guid: 59710136654f8444a85952a5662d6b79, type: 3}
   bulletForce: 15
   cooldown: 2
-  initalShotDelay: 2
+  initalShotDelay: 0.5
   bloodParticle: {fileID: 3743699981803320919, guid: baf340d902879034eb2ff13535f01f7c, type: 3}
   cooldownCounter: 0
   pathfindingAgent: {fileID: 0}

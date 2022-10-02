@@ -43,6 +43,8 @@ public class PlayerCombat : MonoBehaviour
         dashing = false;
         slashing = false;
         chargeTimer = 0.0f;
+        fireReleased = false;
+        fireDown = false;
     }
 
     // Update is called once per frame
@@ -209,6 +211,7 @@ public class PlayerCombat : MonoBehaviour
     {
         gameEnded = true;
         slowMo.DoSlowMo(0.3f);
+        cam.GetComponent<CameraFollow>().enabled = true;
         cam.GetComponent<PixelPerfectCamera>().refResolutionX = (int)(cam.GetComponent<PixelPerfectCamera>().refResolutionX * 0.5f);
         cam.GetComponent<PixelPerfectCamera>().refResolutionY = (int)(cam.GetComponent<PixelPerfectCamera>().refResolutionY * 0.5f);
         yield return new WaitForSecondsRealtime(2.0f);
