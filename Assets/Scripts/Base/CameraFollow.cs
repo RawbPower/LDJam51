@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
     private Vector2 offset;
     private Vector2 mousePosition;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (target != null)
         {
@@ -29,7 +29,7 @@ public class CameraFollow : MonoBehaviour
             offset *= offsetDistance;
 
             Vector3 desiredPosition = target.position + new Vector3(offset.x, offset.y, -10);
-            Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+            Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.unscaledDeltaTime);
             transform.position = smoothPosition;
         }
     }

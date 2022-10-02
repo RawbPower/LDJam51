@@ -14,6 +14,13 @@ public class Menus : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 
+    public void NextLevel()
+    {
+        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        nextScene = nextScene % SceneManager.sceneCount;
+        SceneManager.LoadScene(nextScene);
+    }
+
     public void QuitGame()
     {
         Application.Quit();

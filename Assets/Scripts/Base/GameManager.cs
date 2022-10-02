@@ -24,8 +24,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
 
-        DontDestroyOnLoad(this.gameObject);
+    public void Start()
+    {
+        ResumeGame();
     }
 
     public void LoseGame()
