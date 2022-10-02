@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     protected WeaponManager parentWeaponManager;
     protected float cooldown;
     protected bool hasAmmo;
+    protected bool isFacingFront;
 
     protected virtual void Start()
     {
@@ -61,5 +62,10 @@ public class Weapon : MonoBehaviour
     public void Unequip()
     {
         parentWeaponManager = null;
+    }
+
+    public void SetFacingFront(bool front)
+    {
+        isFacingFront = front;
     }
 }

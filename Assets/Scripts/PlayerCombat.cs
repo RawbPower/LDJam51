@@ -50,6 +50,8 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        weaponManager.GetEquipedWeapon().SetFacingFront(controller.IsFacingForward());
+
         if (!gameEnded)
         {
             Vector2 aimDirection = controller.GetAimDirection();
@@ -89,38 +91,41 @@ public class PlayerCombat : MonoBehaviour
             chargeRatio = chargeTimer / fullChargeTime;
             UISlider.value = chargeRatio;
 
-            if (fireDown)
+            if (!slashing && !dashing)
             {
-                if (!dashing)
+                if (fireDown)
                 {
-                    ChargeAttack();
-                    fireDown = false;
-                }
-            }
-            else if (fireReleased)
-            {
-                ReleaseAttack();
-                fireReleased = false;
-            }
-
-            Weapon weapon = weaponManager.GetEquipedWeapon();
-            if (dashing && !slashing && weapon is MeleeWeapon)
-            {
-                MeleeWeapon sword = weapon as MeleeWeapon;
-                CircleCollider2D slashCollider = sword.slashScan;
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, slashCollider.radius, sword.hitMask);
-
-                foreach (Collider2D colldier in colliders)
-                {
-                    if (!colldier.gameObject.CompareTag("Player"))
+                    if (!dashing)
                     {
-                        AIAgent enemy = colldier.transform.parent.gameObject.GetComponent<AIAgent>();
-                        if (!enemy || !enemy.IsDead())
+                        ChargeAttack();
+                        fireDown = false;
+                    }
+                }
+                else if (fireReleased)
+                {
+                    ReleaseAttack();
+                    fireReleased = false;
+                }
+
+                Weapon weapon = weaponManager.GetEquipedWeapon();
+                if (dashing && !slashing && weapon is MeleeWeapon)
+                {
+                    MeleeWeapon sword = weapon as MeleeWeapon;
+                    CircleCollider2D slashCollider = sword.slashScan;
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, slashCollider.radius, sword.hitMask);
+
+                    foreach (Collider2D colldier in colliders)
+                    {
+                        if (!colldier.gameObject.CompareTag("Player"))
                         {
-                            Vector2 direction = entity.GetVelocity();
-                            direction.Normalize();
-                            StartCoroutine(Slash(direction));
-                            break;
+                            AIAgent enemy = colldier.transform.parent.gameObject.GetComponent<AIAgent>();
+                            if (!enemy || !enemy.IsDead())
+                            {
+                                Vector2 direction = entity.GetVelocity();
+                                direction.Normalize();
+                                StartCoroutine(Slash(direction));
+                                break;
+                            }
                         }
                     }
                 }
@@ -145,6 +150,8 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator Dash()
     {
+        animator.SetBool("Charge", false);
+        animator.SetBool("Dash", true);
         slowMo.ResumeNormalSpeed();
         Vector2 aimDir = controller.GetAimDirection();
         //GetComponent<SpriteRenderer>().color = Color.white;
@@ -163,11 +170,18 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator Slash(Vector2 aimDir)
     {
         slashing = true;
-        animator.SetBool("Charge", false);
-        animator.SetBool("Slash", true);
+        animator.SetBool("Dash", false);
+        animator.SetTrigger("Slash");
+        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg - 90.0f;
+        if (controller.IsFacingForward())
+        {
+            angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg + 90.0f;
+        }
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+
         weaponManager.GetEquipedWeapon().Attack(aimDir);
-        yield return new WaitForSeconds(weaponManager.GetEquipedWeapon().GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.2f);
-        animator.SetBool("Slash", false);
+        yield return new WaitForSeconds(0.4f);
+        transform.rotation = Quaternion.identity;
         dashing = false;
         slashing = false;
     }

@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public Transform crosshair;
     public bool showCursor;
 
+    private bool facingForward;
+
     private Vector2 aimDirection;
 
     private Vector2 movementInput;
@@ -50,6 +52,19 @@ public class PlayerController : MonoBehaviour
         //float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 90.0f;
         //transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
 
+        facingForward = mouseWorldPosition.y < transform.position.y;
+        Debug.Log("Mouse Pos: " + mouseWorldPosition.y);
+        Debug.Log("Player Pos: " + transform.position.y);
+
+        if (facingForward)
+        {
+            animator.SetBool("Front", true);
+        }
+        else
+        {
+            animator.SetBool("Front", false);
+        }
+
         if (movementInput.x > 0.0f)
         {
             sprite.flipX = false;
@@ -58,6 +73,11 @@ public class PlayerController : MonoBehaviour
         {
             sprite.flipX = true;
         }
+    }
+
+    public bool IsFacingForward()
+    {
+        return facingForward;
     }
 
     // Update is called once per frame
