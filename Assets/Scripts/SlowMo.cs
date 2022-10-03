@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.U2D;
+using UnityEngine.Audio;
 
 public class SlowMo : MonoBehaviour
 {
@@ -11,7 +12,13 @@ public class SlowMo : MonoBehaviour
     public Text timerUI;
     public float maxTime = 10.0f;
     public Text timeUpUI;
+    public float slowMoPitch;
+    public float slowMoLowPass = 5000.0f;
+    public AudioMixer audioMixer;
+    public float pitchSmoothing = 1.0f;
+    public AudioReverbZone reverb;
 
+    private float desiredPitch = 1.0f;
     private bool completed;
     private bool timeUp = false;
 
@@ -42,6 +49,20 @@ public class SlowMo : MonoBehaviour
                 StartCoroutine(TimeUp()); ;
             }
         }
+
+        if (desiredPitch == 1.0f)
+        {
+            reverb.enabled = false;
+            audioMixer.SetFloat("pitchMusic", desiredPitch);
+        }
+        else
+        {
+            reverb.enabled = true;
+            float musicPitch = 1.0f;
+            audioMixer.GetFloat("pitchMusic", out musicPitch);
+            float smoothPitch = Mathf.Lerp(musicPitch, desiredPitch, pitchSmoothing);
+            audioMixer.SetFloat("pitchMusic", smoothPitch);
+        }
     }
 
     IEnumerator TimeUp()
@@ -60,11 +81,15 @@ public class SlowMo : MonoBehaviour
     {
         Time.timeScale = slowMoScale > 0.0 ? slowMoScale : slowMoRatio;
         Time.fixedDeltaTime = Time.timeScale * Time.fixedUnscaledDeltaTime;
+        desiredPitch = slowMoPitch;
+        audioMixer.SetFloat("lowpassMusic", slowMoLowPass);
     }
 
     public void ResumeNormalSpeed()
     {
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = Time.fixedUnscaledDeltaTime;
+        desiredPitch = 1.0f;
+        audioMixer.SetFloat("lowpassMusic", 5000.0f);
     }
 }

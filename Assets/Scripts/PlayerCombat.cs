@@ -24,6 +24,7 @@ public class PlayerCombat : MonoBehaviour
     private bool fireDown = false;
     private bool fireReleased = false;
     private bool gameEnded = false;
+    private bool slashScanned = false;
 
     private PlayerController controller;
     private Animator animator;
@@ -124,6 +125,8 @@ public class PlayerCombat : MonoBehaviour
                                 Vector2 direction = entity.GetVelocity();
                                 direction.Normalize();
                                 StartCoroutine(Slash(direction));
+                                Debug.Log("Slash Scan");
+                                slashScanned = true; ;
                                 break;
                             }
                         }
@@ -150,6 +153,7 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator Dash()
     {
+        slashScanned = false;
         animator.SetBool("Charge", false);
         animator.SetBool("Dash", true);
         slowMo.ResumeNormalSpeed();
@@ -161,10 +165,11 @@ public class PlayerCombat : MonoBehaviour
         float slashTime = dashTime - 0.1f;
         slashTime = Mathf.Max(0.0f, slashTime);
         yield return new WaitForSeconds(slashTime);
-        if (!slashing )
+        if (!slashing && !slashScanned)
         {
             StartCoroutine(Slash(aimDir));
         }
+        slashScanned = false;
     }
 
     IEnumerator Slash(Vector2 aimDir)
@@ -210,6 +215,7 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.7f);
         //yield return new WaitForSecondsRealtime(100.0f);
         FindObjectOfType<GameManager>().LoseGame();
+        slowMo.ResumeNormalSpeed();
         Destroy(gameObject);
     }
 
@@ -231,6 +237,7 @@ public class PlayerCombat : MonoBehaviour
         cam.GetComponent<PixelPerfectCamera>().refResolutionY = (int)(cam.GetComponent<PixelPerfectCamera>().refResolutionY * 0.5f);
         yield return new WaitForSecondsRealtime(2.0f);
         FindObjectOfType<GameManager>().WinGame();
+        slowMo.ResumeNormalSpeed();
     }
 
     public void FireInput(InputAction.CallbackContext context)
