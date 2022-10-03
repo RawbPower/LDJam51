@@ -10,7 +10,7 @@ public class ChoppedParticle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        choppedParticleSystem.textureSheetAnimation.AddSprite(chopSprite);
+        choppedParticleSystem.textureSheetAnimation.SetSprite(0, chopSprite);
     }
 
     // Update is called once per frame

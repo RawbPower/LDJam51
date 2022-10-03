@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  speed: 10
+  speed: 7
   speedVariation: 0
   acceleration:
     serializedVersion: 2
@@ -81,6 +81,8 @@ MonoBehaviour:
   knockback: 70
   explosion: {fileID: 0}
   hitbox: {fileID: 1515954455281563500}
+  noRotation: 0
+  ownerTag: 
 --- !u!212 &6170801263939235233
 SpriteRenderer:
   m_ObjectHideFlags: 0

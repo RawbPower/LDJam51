@@ -24,7 +24,7 @@ public class Hitbox : MonoBehaviour
         GameObject damageSource = transform.parent.gameObject;
         Bullet bullet = damageSource.GetComponent<Bullet>();
 
-        if (bullet != null && hitObject.CompareTag("Enemy"))
+        if (bullet != null && hitObject.CompareTag(bullet.ownerTag))
         {
             return;
         }
@@ -47,7 +47,10 @@ public class Hitbox : MonoBehaviour
             if (hitEntity != null)
             {
                 hitDirection = bullet.GetVelocity().normalized;
-                hitEntity.SetVelocity(hitDirection * bullet.knockback);
+                if (!hitObject.CompareTag("Tenticle"))
+                {
+                    hitEntity.SetVelocity(hitDirection * bullet.knockback);
+                }
             }
         }
 
@@ -59,7 +62,10 @@ public class Hitbox : MonoBehaviour
             {
                 hitDirection = hitObject.transform.position - damageSource.transform.position;
                 hitDirection.Normalize();
-                hitEntity.SetVelocity(hitDirection * hazard.knockback);
+                if (!hitObject.CompareTag("Tenticle"))
+                {
+                    hitEntity.SetVelocity(hitDirection * hazard.knockback);
+                }
             }
         }
 
@@ -71,7 +77,10 @@ public class Hitbox : MonoBehaviour
             {
                 hitDirection = hitObject.transform.position - damageSource.transform.position;
                 hitDirection.Normalize();
-                hitEntity.SetVelocity(hitDirection * weapon.knockback);
+                if (!hitObject.CompareTag("Tenticle"))
+                {
+                    hitEntity.SetVelocity(hitDirection * weapon.knockback);
+                }
             }
         }
 

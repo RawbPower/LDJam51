@@ -12,6 +12,7 @@ public class SlowMo : MonoBehaviour
     public float maxTime = 10.0f;
     public Text timeUpUI;
 
+    private bool completed;
     private bool timeUp = false;
 
     private float timer;
@@ -19,18 +20,27 @@ public class SlowMo : MonoBehaviour
     private void Start()
     {
         timer = maxTime;
+        completed = false;
+    }
+
+    public void SetCompleted(bool value)
+    {
+        completed = value;
     }
 
     private void Update()
     {
-        timer -= Time.deltaTime;
-        timer = Mathf.Clamp(timer, 0.0f, maxTime);
-        timerUI.text = timer.ToString("0.00");
-
-        if (timer <= 0.0f && !timeUp)
+        if (!completed)
         {
-            timeUp = true;
-            StartCoroutine(TimeUp()); ;
+            timer -= Time.deltaTime;
+            timer = Mathf.Clamp(timer, 0.0f, maxTime);
+            timerUI.text = timer.ToString("0.00");
+
+            if (timer <= 0.0f && !timeUp)
+            {
+                timeUp = true;
+                StartCoroutine(TimeUp()); ;
+            }
         }
     }
 

@@ -75,10 +75,11 @@ public class AIAgent : MonoBehaviour
                 cooldownCounter = 0.0f;
             }
 
-            if (GetTarget() != null)
+            if (GetTarget() != null && gunSprite != null)
             {
                 Vector2 aimDir = GetTarget().transform.position - _entity.transform.position;
                 aimDir.Normalize();
+
                 float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
                 gunSprite.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
             }
@@ -127,10 +128,13 @@ public class AIAgent : MonoBehaviour
             }
         }
         FindObjectOfType<EnemyManager>().OnEnemyDied();
-        animator.SetBool("Hit", true);
-        yield return new WaitForSecondsRealtime(0.3f);
-        animator.SetBool("Hit", false);
-        animator.SetBool("Death", true);
+        if (animator != null)
+        {
+            animator.SetBool("Hit", true);
+            yield return new WaitForSecondsRealtime(0.3f);
+            animator.SetBool("Hit", false);
+            animator.SetBool("Death", true);
+        }
         if (bloodParticle != null)
         {
             Instantiate(bloodParticle.gameObject, transform.position, Quaternion.identity);

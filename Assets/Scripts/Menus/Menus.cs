@@ -17,7 +17,7 @@ public class Menus : MonoBehaviour
     public void NextLevel()
     {
         int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
-        nextScene = nextScene % SceneManager.sceneCount;
+        nextScene = nextScene % SceneManager.sceneCountInBuildSettings;
         SceneManager.LoadScene(nextScene);
     }
 

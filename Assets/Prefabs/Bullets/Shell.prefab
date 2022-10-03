@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  speed: 20
+  speed: 10
   speedVariation: 5
   acceleration:
     serializedVersion: 2
@@ -87,7 +87,10 @@ MonoBehaviour:
   timeVariation: 0.25
   bounce: 1
   penetrate: 0
+  knockback: 0
+  explosion: {fileID: 0}
   hitbox: {fileID: 6123672599970973203}
+  noRotation: 0
 --- !u!212 &6170801263939235233
 SpriteRenderer:
   m_ObjectHideFlags: 0

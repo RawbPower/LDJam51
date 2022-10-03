@@ -15,6 +15,9 @@ public class Bullet : MonoBehaviour
     public float knockback;
     public GameObject explosion;
     public Hitbox hitbox;
+    public bool noRotation = false;
+    [HideInInspector]
+    public string ownerTag;
 
     private float startSpeed;
     private float bulletTime;
@@ -61,6 +64,11 @@ public class Bullet : MonoBehaviour
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg - 90.0f;        // -90 degree offset due to original direction being 90 degrees from x axis
         Quaternion bulletRotation = Quaternion.Euler(0.0f, 0.0f, angle);
         transform.rotation = bulletRotation;
+
+        if (noRotation)
+        {
+            transform.rotation = Quaternion.identity;
+        }
     }
 
     private void FixedUpdate()

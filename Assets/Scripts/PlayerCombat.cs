@@ -223,6 +223,7 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator OnWin()
     {
+        slowMo.SetCompleted(true);
         gameEnded = true;
         slowMo.DoSlowMo(0.3f);
         cam.GetComponent<CameraFollow>().enabled = true;
