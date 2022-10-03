@@ -457,6 +457,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1847310713, guid: 37ef4c0067bde5f4d8d35d887183179e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4399947440910571568, guid: 37ef4c0067bde5f4d8d35d887183179e, type: 3}
       propertyPath: m_Name
       value: SlowMo
@@ -1320,6 +1324,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1826988206333116082, guid: 5542130323c91c140a98bbc68e15d39f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4541494347072595302, guid: 5542130323c91c140a98bbc68e15d39f, type: 3}
       propertyPath: cam
       value: 

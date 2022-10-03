@@ -75,7 +75,7 @@ public class Hitbox : MonoBehaviour
             Entity hitEntity = hitObject.GetComponent<Entity>();
             if (hitEntity != null)
             {
-                hitDirection = hitObject.transform.position - damageSource.transform.position;
+                hitDirection = hitObject.transform.position - damageSource.transform.parent.position;
                 hitDirection.Normalize();
                 if (!hitObject.CompareTag("Tenticle"))
                 {

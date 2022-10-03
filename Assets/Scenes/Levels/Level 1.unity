@@ -261,7 +261,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1190589863, guid: 3650985624c31c44f96259229864b239, type: 3}
       propertyPath: cooldown
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1190589863, guid: 3650985624c31c44f96259229864b239, type: 3}
       propertyPath: initalShotDelay
@@ -399,11 +399,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1190589863, guid: 3650985624c31c44f96259229864b239, type: 3}
       propertyPath: cooldown
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1190589863, guid: 3650985624c31c44f96259229864b239, type: 3}
       propertyPath: initalShotDelay
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1459303452, guid: 3650985624c31c44f96259229864b239, type: 3}
       propertyPath: spray

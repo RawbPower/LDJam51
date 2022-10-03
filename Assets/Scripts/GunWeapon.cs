@@ -106,7 +106,7 @@ public class GunWeapon : Weapon
     IEnumerator TripleShot(Vector2 aimDir)
     {
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg - 90.0f;        // -90 degree offset due to original direction being 90 degrees from x axis
-        float[] angles = { angle - 20.0f, angle, angle + 20.0f };
+        float[] angles = { angle - 25.0f, angle, angle + 25.0f };
         Vector2 bulletPosition = new Vector2(transform.position.x, transform.position.y) + bulletOffset * aimDir;
         Vector2 flashPosition = new Vector2(transform.position.x, transform.position.y) + flashOffset * aimDir;
         Instantiate(flashPrefab, flashPosition, Quaternion.identity);

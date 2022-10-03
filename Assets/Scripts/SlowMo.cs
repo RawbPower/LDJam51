@@ -16,7 +16,9 @@ public class SlowMo : MonoBehaviour
     public float slowMoLowPass = 5000.0f;
     public AudioMixer audioMixer;
     public float pitchSmoothing = 1.0f;
+    public float pitchSmoothingUp = 1.0f;
     public AudioReverbZone reverb;
+    public GameObject postProcessingObject;
 
     private float desiredPitch = 1.0f;
     private bool completed;
@@ -52,8 +54,12 @@ public class SlowMo : MonoBehaviour
 
         if (desiredPitch == 1.0f)
         {
-            reverb.enabled = false;
-            audioMixer.SetFloat("pitchMusic", desiredPitch);
+            float musicPitch = 1.0f;
+            audioMixer.GetFloat("pitchMusic", out musicPitch);
+            float smoothPitch = Mathf.Lerp(musicPitch, desiredPitch, pitchSmoothingUp);
+            audioMixer.SetFloat("pitchMusic", smoothPitch);
+            postProcessingObject.SetActive(true);
+            postProcessingObject.SetActive(false);
         }
         else
         {
@@ -62,6 +68,7 @@ public class SlowMo : MonoBehaviour
             audioMixer.GetFloat("pitchMusic", out musicPitch);
             float smoothPitch = Mathf.Lerp(musicPitch, desiredPitch, pitchSmoothing);
             audioMixer.SetFloat("pitchMusic", smoothPitch);
+            postProcessingObject.SetActive(true);
         }
     }
 

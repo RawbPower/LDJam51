@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiIcon: {fileID: 0}
   automatic: 0
-  bulletPrefab: {fileID: 238904412954264408, guid: 59710136654f8444a85952a5662d6b79, type: 3}
+  bulletPrefab: {fileID: 238904412954264408, guid: 33f9c69c8fec22544837a2ecffa8dfc7, type: 3}
   flashPrefab: {fileID: 7437662359469645206, guid: 784733a77422c254fa58183e00ad71fa, type: 3}
   shotType: 1
   fireRate: 4
@@ -55,6 +55,7 @@ MonoBehaviour:
   clipSize: 3
   spray: 5
   flashOffset: 0
+  bulletOffset: 1
 --- !u!1 &399252913499057584
 GameObject:
   m_ObjectHideFlags: 0
