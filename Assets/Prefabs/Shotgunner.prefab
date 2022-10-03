@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766756251269797}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.23, z: 0}
+  m_LocalPosition: {x: 0.13, y: -0.051, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1570295247
   m_SortingLayer: 3
   m_SortingOrder: 4
-  m_Sprite: {fileID: -1826787685, guid: c44f42d9439c1a640a2a2e601148dfc6, type: 3}
+  m_Sprite: {fileID: -2028335125, guid: c44f42d9439c1a640a2a2e601148dfc6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 3640382892167329411}
   - component: {fileID: 3640382891717490776}
   - component: {fileID: 3640382890643882987}
+  - component: {fileID: 4724442646799829408}
   m_Layer: 11
   m_Name: Shotgunner
   m_TagString: Enemy
@@ -310,6 +311,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4724442646799829408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991456779119938731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e355d99d86cd3b94d8194c4113e25a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Hit
+    clip: {fileID: 8300000, guid: cb3de10553a0da348b9ba19bca4f3cd5, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    output: {fileID: 0}
+    source: {fileID: 0}
 --- !u!1 &991456779742105926
 GameObject:
   m_ObjectHideFlags: 0

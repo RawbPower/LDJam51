@@ -37,9 +37,10 @@ public class GameManager : MonoBehaviour
         PauseGame();
     }
 
-    public void WinGame()
+    public void WinGame(float time)
     {
         winUI.SetActive(true);
+        winUI.GetComponent<WinMenu>().SetTimeString("Time: " + time.ToString("0.00"));
         PauseGame();
     }
 

@@ -1132,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7470686671394450583, guid: 5840f6286dbb0c44cb65c5026b788c04, type: 3}
       propertyPath: m_Text
-      value: 1 - 1 The Beginning
+      value: 1 - 1  The Beginning
       objectReference: {fileID: 0}
     - target: {fileID: 7470686671394450583, guid: 5840f6286dbb0c44cb65c5026b788c04, type: 3}
       propertyPath: m_FontData.m_MinSize

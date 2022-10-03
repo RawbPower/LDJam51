@@ -31,6 +31,7 @@ public class AIAgent : MonoBehaviour
     private EnemyStateMachine _enemyFSM;
     private WeaponManager weaponManager;
     private Animator animator;
+    private SpriteRenderer sprite;
 
     [HideInInspector] public PathfindingAgent pathfindingAgent;
 
@@ -49,6 +50,7 @@ public class AIAgent : MonoBehaviour
         pathfindingAgent = gameObject.GetComponent<PathfindingAgent>();
         weaponManager = GetComponent<WeaponManager>();
         animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
 
         cooldownCounter = initalShotDelay;
     }
@@ -79,6 +81,15 @@ public class AIAgent : MonoBehaviour
             {
                 Vector2 aimDir = GetTarget().transform.position - _entity.transform.position;
                 aimDir.Normalize();
+
+                if (aimDir.x < 0.0f)
+                {
+                    sprite.flipX = true;
+                }
+                else
+                {
+                    sprite.flipX = false;
+                }
 
                 float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
                 gunSprite.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
@@ -119,6 +130,7 @@ public class AIAgent : MonoBehaviour
     IEnumerator OnDead()
     {
         dead = true;
+        GetComponent<AudioManager>().Play("Hit");
         Collider2D[] hitboxes = GetComponentsInChildren<Collider2D>();
         foreach (Collider2D hitbox in hitboxes)
         {

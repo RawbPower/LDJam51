@@ -95,7 +95,7 @@ public class GunWeapon : Weapon
         Quaternion bulletRotation = Quaternion.Euler(0.0f, 0.0f, angle);
         Vector2 flashPosition = new Vector2(transform.position.x, transform.position.y) + flashOffset * aimDir;
         Instantiate(flashPrefab, flashPosition, Quaternion.identity);
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.3f);
         GameObject bulletObject = Instantiate(bulletPrefab, bulletPosition, bulletRotation);
         Bullet bullet = bulletObject.GetComponent<Bullet>();
         bullet.SetInitialDirection(rotatedAimDir);
@@ -110,7 +110,7 @@ public class GunWeapon : Weapon
         Vector2 bulletPosition = new Vector2(transform.position.x, transform.position.y) + bulletOffset * aimDir;
         Vector2 flashPosition = new Vector2(transform.position.x, transform.position.y) + flashOffset * aimDir;
         Instantiate(flashPrefab, flashPosition, Quaternion.identity);
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.3f);
         foreach (float bulletAngle in angles)
         {
             if (currentAmmo >= 0)
@@ -133,7 +133,7 @@ public class GunWeapon : Weapon
         Vector2 bulletPosition = new Vector2(transform.position.x, transform.position.y) + bulletOffset * aimDir;
         Vector2 flashPosition = new Vector2(transform.position.x, transform.position.y) + flashOffset * aimDir;
         Instantiate(flashPrefab, flashPosition, Quaternion.identity);
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.3f);
         foreach (float bulletAngle in angles)
         {
             if (currentAmmo >= 0)
@@ -156,7 +156,7 @@ public class GunWeapon : Weapon
         Vector2 bulletPosition = new Vector2(transform.position.x, transform.position.y) + bulletOffset * aimDir;
         Vector2 flashPosition = new Vector2(transform.position.x, transform.position.y) + flashOffset * aimDir;
         Instantiate(flashPrefab, flashPosition, Quaternion.identity);
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.3f);
         foreach (float bulletAngle in angles)
         {
             Vector2 rotatedAimDir = Quaternion.Euler(0.0f, 0.0f, bulletAngle - angle) * aimDir;

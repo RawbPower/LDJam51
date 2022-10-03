@@ -111,7 +111,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.044852674, y: -0.0800941}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -122,7 +122,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6924386, y: 0.8398118}
   m_EdgeRadius: 0
 --- !u!1 &1011242119
 GameObject:
@@ -242,6 +242,10 @@ MonoBehaviour:
   fireRate: 8
   maxAmmo: 100
   startAmmo: 100
+  clipSize: 1
+  spray: 0
+  flashOffset: 0.5
+  bulletOffset: 1
 --- !u!1 &3639887241731908399
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,8 +270,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3639887241731908399}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.23, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.045, y: -0.127, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -469,6 +473,7 @@ GameObject:
   - component: {fileID: 1092628233}
   - component: {fileID: 2081432018}
   - component: {fileID: 1008196193}
+  - component: {fileID: 5964244891376685925}
   m_Layer: 11
   m_Name: NPC
   m_TagString: Enemy
@@ -678,3 +683,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5964244891376685925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559718991411680545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e355d99d86cd3b94d8194c4113e25a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Hit
+    clip: {fileID: 8300000, guid: cb3de10553a0da348b9ba19bca4f3cd5, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    output: {fileID: 0}
+    source: {fileID: 0}

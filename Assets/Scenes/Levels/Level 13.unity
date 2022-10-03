@@ -558,7 +558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3951031149215023597, guid: 8fa7c93aeabdba540a56b22c2bb050d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.137353
+      value: 1.64
       objectReference: {fileID: 0}
     - target: {fileID: 3951031149215023597, guid: 8fa7c93aeabdba540a56b22c2bb050d2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3133,7 +3133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7470686671394450583, guid: 5840f6286dbb0c44cb65c5026b788c04, type: 3}
       propertyPath: m_Text
-      value: 3 -3 Picking Sides
+      value: 3 -3  Picking Sides
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5840f6286dbb0c44cb65c5026b788c04, type: 3}

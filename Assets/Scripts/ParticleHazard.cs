@@ -24,10 +24,4 @@ public class ParticleHazard : MonoBehaviour
             health.ReduceHealth(damage);
         }
     }
-
-    private void OnParticleTrigger()
-    {
-        Component component = part.trigger.GetCollider(0);
-        Debug.Log("Ping");
-    }
 }

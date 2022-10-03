@@ -23,11 +23,9 @@ public class IdleEnemyState : EnemyState
     }
     public override void OnEnterState() 
     {
-        Debug.Log("Enter Idle State");
     }
     public override void OnExitState() 
     {
-        Debug.Log("Exit Idle State");
     }
 
     public override void StateAnimation()

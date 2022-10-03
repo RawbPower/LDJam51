@@ -53,8 +53,6 @@ public class PlayerController : MonoBehaviour
         //transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
 
         facingForward = mouseWorldPosition.y < transform.position.y;
-        Debug.Log("Mouse Pos: " + mouseWorldPosition.y);
-        Debug.Log("Player Pos: " + transform.position.y);
 
         if (facingForward)
         {

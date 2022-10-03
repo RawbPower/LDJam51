@@ -16,7 +16,6 @@ public class AmmoPickup : Pickup
                 gun.IncreaseAmmo(ammo);
             }
         }
-        Debug.Log("Ammo increased by " + ammo);
 
         base.Activate(otherGameObject);
     }

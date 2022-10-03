@@ -123,18 +123,22 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!224 &409341694 stripped
+--- !u!224 &1034504032 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3495758856111777330, guid: 9120477e75bdcc1438851b0efe4292f1, type: 3}
-  m_PrefabInstance: {fileID: 767731686}
+  m_PrefabInstance: {fileID: 1302221336}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &767731686
+--- !u!1001 &1302221336
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 3426093559700393515}
     m_Modifications:
+    - target: {fileID: 3495758856030177132, guid: 9120477e75bdcc1438851b0efe4292f1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 56.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3495758856111777330, guid: 9120477e75bdcc1438851b0efe4292f1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -223,13 +227,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Options Menu (Mouse)
       objectReference: {fileID: 0}
-    - target: {fileID: 3495758856619504978, guid: 9120477e75bdcc1438851b0efe4292f1, type: 3}
-      propertyPath: initIndex
-      value: 2
+    - target: {fileID: 3495758856142778674, guid: 9120477e75bdcc1438851b0efe4292f1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 21.1
       objectReference: {fileID: 0}
-    - target: {fileID: 3495758856658812277, guid: 9120477e75bdcc1438851b0efe4292f1, type: 3}
-      propertyPath: m_Text
-      value: 960x540
+    - target: {fileID: 3495758856309576334, guid: 9120477e75bdcc1438851b0efe4292f1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495758856619504976, guid: 9120477e75bdcc1438851b0efe4292f1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9120477e75bdcc1438851b0efe4292f1, type: 3}
@@ -530,7 +538,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 409341694}
+  - {fileID: 1034504032}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -24,12 +24,10 @@ public class ProneEnemyState : EnemyState
     }
     public override void OnEnterState()
     {
-        Debug.Log("Enter Prone State");
     }
     public override void OnExitState()
     {
         _knockbackCounter = 0.0f;
-        Debug.Log("Exit Prone State");
     }
 
     public override void StateAnimation()

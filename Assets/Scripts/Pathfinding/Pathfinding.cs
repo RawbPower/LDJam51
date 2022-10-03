@@ -142,7 +142,6 @@ public class Pathfinding : MonoBehaviour
                         openSet.UpdateItem(endNode);
                     }
 
-                    //Debug.Log(openSet.Count);
 
                 }
 

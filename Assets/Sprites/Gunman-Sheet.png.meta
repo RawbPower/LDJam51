@@ -187,7 +187,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 9
-      pivot: {x: 0.53155804, y: 0.34220904}
+      pivot: {x: 0.6065092, y: 0.43293887}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -195,6 +195,48 @@ TextureImporter:
       bones: []
       spriteID: d8d5d814a51605c4cbe1606947f346ce
       internalID: -1826787685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunman-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.563117, y: 0.46055228}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5175b8b8c29dab64ba5723661e98b891
+      internalID: -2028335125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunman-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5355034, y: 0.46055228}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19d1d8c391d489c4eaaf0276dbfacd72
+      internalID: -186552529
       vertices: []
       indices: 
       edges: []
@@ -210,9 +252,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Gunman-Sheet_4: -2028335125
       Gunman-Sheet_0: -1085683093
       Gunman-Sheet_2: 511766694
       Gunman-Sheet_3: -1826787685
+      Gunman-Sheet_5: -186552529
       Gunman-Sheet_1: 320343219
   spritePackingTag: 
   pSDRemoveMatte: 0

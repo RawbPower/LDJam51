@@ -33,9 +33,14 @@ public class OptionsSettings : MonoBehaviour
 
             if (GameManager.instance.GetFullScreenIndex() >= 0)
             {
-                fullscreen.isOn = GameManager.instance.GetFullScreenIndex() == 0 ? false : true;
+                fullscreen.isOn = Screen.fullScreen ? true : false;
             }
         }
+
+        music.UpdateLabel();
+        sfx.UpdateLabel();
+        size.UpdateLabel();
+        fullscreen.isOn = Screen.fullScreen ? true : false;
     }
 
    public void SaveOptionsSettings()
@@ -47,12 +52,11 @@ public class OptionsSettings : MonoBehaviour
             GameManager.instance.SetScreenSizeIndex(size.GetCurrentIndex());
             GameManager.instance.SetFullScreenIndex(fullscreen.isOn ? 1 : 0);
         }
-   }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start");
     }
 
     public void SetMusicVolume(float volumeRatio)

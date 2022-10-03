@@ -12,7 +12,6 @@ public class HealthPickup : Pickup
         {
             healthComponent.IncreaseHealth(health);
         }
-        Debug.Log("Health increased by " + health);
 
         base.Activate(otherGameObject);
     }

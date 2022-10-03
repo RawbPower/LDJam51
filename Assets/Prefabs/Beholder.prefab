@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 1716010676163497400}
   - component: {fileID: 1716010675143230307}
   - component: {fileID: 1716010676217395408}
+  - component: {fileID: 5268220835764341182}
   m_Layer: 11
   m_Name: Beholder
   m_TagString: Tenticle
@@ -471,6 +472,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5268220835764341182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2924840421162153872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e355d99d86cd3b94d8194c4113e25a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Hit
+    clip: {fileID: 8300000, guid: cb3de10553a0da348b9ba19bca4f3cd5, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    output: {fileID: 0}
+    source: {fileID: 0}
 --- !u!1 &2924840421817608829
 GameObject:
   m_ObjectHideFlags: 0

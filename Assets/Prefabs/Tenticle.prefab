@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 399252912519199939}
   - component: {fileID: 399252913592518512}
   - component: {fileID: 4237058403355920439}
+  - component: {fileID: 7286498217698836232}
   m_Layer: 11
   m_Name: Tenticle
   m_TagString: Tenticle
@@ -486,6 +487,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   choppedParticles:
   - {fileID: 2841226290068614110, guid: 2c256b44951f83b4b83a9b618a13c0ab, type: 3}
+--- !u!114 &7286498217698836232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4237058403355920432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e355d99d86cd3b94d8194c4113e25a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Hit
+    clip: {fileID: 8300000, guid: cb3de10553a0da348b9ba19bca4f3cd5, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    output: {fileID: 0}
+    source: {fileID: 0}
 --- !u!1 &4237058404011185629
 GameObject:
   m_ObjectHideFlags: 0

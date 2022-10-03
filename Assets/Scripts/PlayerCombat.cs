@@ -40,7 +40,7 @@ public class PlayerCombat : MonoBehaviour
         entity = GetComponent<Entity>();
 
         charging = false;
-        chargingForward = true;
+        chargingForward = false;
         dashing = false;
         slashing = false;
         chargeTimer = 0.0f;
@@ -59,6 +59,13 @@ public class PlayerCombat : MonoBehaviour
             arrow.position = new Vector3(transform.position.x + aimDirection.x * 1.5f, transform.position.y + aimDirection.y * 1.5f, 0.0f);
             float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
             arrow.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+
+            if (slowMo.IsSlowMo() && !fireDown)
+            {
+                fireReleased = true;
+                slashing = false;
+                dashing = false;
+            }
 
             if (charging)
             {
@@ -99,7 +106,7 @@ public class PlayerCombat : MonoBehaviour
                     if (!dashing)
                     {
                         ChargeAttack();
-                        fireDown = false;
+                        //fireDown = false;
                     }
                 }
                 else if (fireReleased)
@@ -139,9 +146,13 @@ public class PlayerCombat : MonoBehaviour
     void ChargeAttack()
     {
         //GetComponent<SpriteRenderer>().color = Color.red;
-        slowMo.DoSlowMo();
-        animator.SetBool("Charge", true);
-        charging = true;
+        if (!charging)
+        {
+            slowMo.DoSlowMo();
+            GetComponent<AudioManager>().Play("Unsheath");
+            animator.SetBool("Charge", true);
+            charging = true;
+        }
     }
 
     void ReleaseAttack()
@@ -175,6 +186,7 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator Slash(Vector2 aimDir)
     {
         slashing = true;
+        GetComponent<AudioManager>().Play("Slash");
         animator.SetBool("Dash", false);
         animator.SetTrigger("Slash");
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg - 90.0f;
@@ -202,8 +214,11 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator OnDead()
     {
         gameEnded = true;
+        Debug.Log("Game Ended from death");
+        GetComponent<AudioManager>().Play("Hit");
         Destroy(weaponManager.GetEquipedWeapon().gameObject);
         Destroy(arrow.gameObject);
+        slowMo.SetCompleted(true);
         slowMo.DoSlowMo();
         cam.GetComponent<CameraFollow>().enabled = true;
         cam.GetComponent<PixelPerfectCamera>().refResolutionX = (int)(cam.GetComponent<PixelPerfectCamera>().refResolutionX * 0.5f);
@@ -231,12 +246,13 @@ public class PlayerCombat : MonoBehaviour
     {
         slowMo.SetCompleted(true);
         gameEnded = true;
+        Debug.Log("Game Ended from win");
         slowMo.DoSlowMo(0.3f);
         cam.GetComponent<CameraFollow>().enabled = true;
         cam.GetComponent<PixelPerfectCamera>().refResolutionX = (int)(cam.GetComponent<PixelPerfectCamera>().refResolutionX * 0.5f);
         cam.GetComponent<PixelPerfectCamera>().refResolutionY = (int)(cam.GetComponent<PixelPerfectCamera>().refResolutionY * 0.5f);
         yield return new WaitForSecondsRealtime(2.0f);
-        FindObjectOfType<GameManager>().WinGame();
+        FindObjectOfType<GameManager>().WinGame(slowMo.GetTimeLeft());
         slowMo.ResumeNormalSpeed();
     }
 

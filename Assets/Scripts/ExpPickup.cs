@@ -12,7 +12,6 @@ public class ExpPickup : Pickup
         {
             experienceComponent.IncreaseExp(exp);
         }
-        Debug.Log("Exp increased by " + exp);
 
         base.Activate(otherGameObject);
     }

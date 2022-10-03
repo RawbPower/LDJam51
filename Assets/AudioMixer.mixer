@@ -24,6 +24,8 @@ AudioMixerController:
     name: lowpassMusic
   - guid: d6b852eda3478dc4896e6bc91a03cc96
     name: volumeSFX
+  - guid: 6150d0458dd27094598b15f52758984d
+    name: pitchSFX
   m_AudioMixerGroupViews:
   - guids:
     - 6e795f35fe20e31488e588d578bfda3e
@@ -85,11 +87,12 @@ AudioMixerSnapshotController:
     b1d634c4c2655854789d63e1324e5665: 0.629
     0c8af4f4da152bb4880f6b5e3de9e67d: -963
     0f5aaa662c8478c4bbaa3ec9490a7a5b: 0.485
-    1177d25847587f1488a35385738241d3: 0
+    1177d25847587f1488a35385738241d3: -5.7224774
     c04ba7a8a6b8c5240b3c6bd96e527bb7: 3.93
     579066f9ece48b645b929e4d0389b0a0: -7025
     e20fe0fb49c3cb04c927f6a622335c9d: 379
     c3d05f2d600701b46a32620dc3eb4892: 0.5
+    d6b852eda3478dc4896e6bc91a03cc96: -6.133707
     e9052f1ee27c2d643a949d6da20a0dfc: 0.207
     1d41814e6aeb97343b7a4b72b5e64870: 0.578
     3d1ced7e595dff249991c63814c57ad0: 1

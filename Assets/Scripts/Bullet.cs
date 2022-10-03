@@ -117,7 +117,6 @@ public class Bullet : MonoBehaviour
         if (health != null)
         {
             health.ReduceHealth(damage);
-            Debug.Log(hitObject.name + " took " + damage + " damage and now has " + health.GetHealth() + " health");
         }
 
         if (bounce && bulletTime > 0)
@@ -141,7 +140,6 @@ public class Bullet : MonoBehaviour
         {
             if (collision.contacts[0].normal != lastBounceNormal)
             {
-                Debug.Log("Stay Bounce");
                 initalDirection = Vector2.Reflect(initalDirection, collision.contacts[0].normal);
                 lastBounceNormal = collision.contacts[0].normal;
             }

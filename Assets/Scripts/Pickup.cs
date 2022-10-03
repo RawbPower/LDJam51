@@ -44,13 +44,9 @@ public class Pickup : MonoBehaviour
     {
         isAttracted = true;
         target = transform;
-        Debug.Log("Attract to " + transform.parent.name);
     }
 
     public void UnAttract(Transform transform)
     {
-        //isAttracted = false;
-        //target = null;
-        Debug.Log("Stop attract to " + transform.parent.name);
     }
 }

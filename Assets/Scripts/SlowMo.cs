@@ -29,12 +29,17 @@ public class SlowMo : MonoBehaviour
     private void Start()
     {
         timer = maxTime;
-        completed = false;
+    }
+
+    public float GetTimeLeft()
+    {
+        return maxTime - timer;
     }
 
     public void SetCompleted(bool value)
     {
         completed = value;
+        desiredPitch = 1.0f;
     }
 
     private void Update()
@@ -51,6 +56,10 @@ public class SlowMo : MonoBehaviour
                 StartCoroutine(TimeUp()); ;
             }
         }
+        else
+        {
+            desiredPitch = 1.0f;
+        }
 
         if (desiredPitch == 1.0f)
         {
@@ -58,8 +67,14 @@ public class SlowMo : MonoBehaviour
             audioMixer.GetFloat("pitchMusic", out musicPitch);
             float smoothPitch = Mathf.Lerp(musicPitch, desiredPitch, pitchSmoothingUp);
             audioMixer.SetFloat("pitchMusic", smoothPitch);
-            postProcessingObject.SetActive(true);
-            postProcessingObject.SetActive(false);
+            if (completed)
+            {
+                postProcessingObject.SetActive(true);
+            }
+            else
+            {
+                postProcessingObject.SetActive(false);
+            }
         }
         else
         {
@@ -90,6 +105,11 @@ public class SlowMo : MonoBehaviour
         Time.fixedDeltaTime = Time.timeScale * Time.fixedUnscaledDeltaTime;
         desiredPitch = slowMoPitch;
         audioMixer.SetFloat("lowpassMusic", slowMoLowPass);
+    }
+
+    public bool IsSlowMo()
+    {
+        return Time.timeScale != 1.0f;
     }
 
     public void ResumeNormalSpeed()

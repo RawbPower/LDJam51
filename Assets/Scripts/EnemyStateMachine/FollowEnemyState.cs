@@ -119,11 +119,9 @@ public class FollowEnemyState : EnemyState
     }
     public override void OnEnterState()
     {
-        Debug.Log("Enter Follow State");
     }
     public override void OnExitState()
     {
-        Debug.Log("Exit Follow State");
     }
 
     public override void StateAnimation()

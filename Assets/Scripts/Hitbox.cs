@@ -87,7 +87,6 @@ public class Hitbox : MonoBehaviour
         if (health != null)
         {
             health.ReduceHealth(damage);
-            Debug.Log(hitObject.name + " took " + damage + " damage and now has " + health.GetHealth() + " health");
 
             if (hitDirection != Vector2.zero && health.bloodParticle != null)
             {
