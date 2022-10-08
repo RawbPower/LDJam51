@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public Camera cam;
-    public Transform crosshair;
-    public bool showCursor;
 
     private bool facingForward;
 
@@ -30,11 +28,6 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
-
-        if (crosshair != null && !showCursor)
-        {
-            Cursor.visible = false;
-        }
     }
 
     private void Update()
@@ -46,7 +39,6 @@ public class PlayerController : MonoBehaviour
 
         //mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mouseWorldPosition = cam.ScreenToWorldPoint(mousePosition);
-        crosshair.position = mouseWorldPosition;
         //aimDirection = mouseWorldPosition - rb.position;
         //aimDirection.Normalize();
         //float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 90.0f;
@@ -85,7 +77,6 @@ public class PlayerController : MonoBehaviour
 
         // Aim
         Vector2 mouseWorldPosition = cam.ScreenToWorldPoint(mousePosition);
-        crosshair.position = mouseWorldPosition;
         aimDirection = mouseWorldPosition - rb.position;
         aimDirection.Normalize();
 

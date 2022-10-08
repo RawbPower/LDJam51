@@ -28,19 +28,19 @@ public class OptionsSettings : MonoBehaviour
 
             if (GameManager.instance.GetScreenSizeIndex() >= 0)
             {
-                //size.initIndex = GameManager.instance.GetScreenSizeIndex();
+                size.initIndex = GameManager.instance.GetScreenSizeIndex();
             }
 
             if (GameManager.instance.GetFullScreenIndex() >= 0)
             {
-                //fullscreen.isOn = Screen.fullScreen ? true : false;
+                fullscreen.isOn = Screen.fullScreen ? true : false;
             }
         }
 
         music.UpdateLabel();
         sfx.UpdateLabel();
-        //size.UpdateLabel();
-        //fullscreen.isOn = Screen.fullScreen ? true : false;
+        size.UpdateLabel();
+        fullscreen.isOn = Screen.fullScreen ? true : false;
     }
 
    public void SaveOptionsSettings()
