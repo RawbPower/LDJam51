@@ -284,7 +284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1459303452, guid: 3650985624c31c44f96259229864b239, type: 3}
       propertyPath: clipSize
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1459303452, guid: 3650985624c31c44f96259229864b239, type: 3}
       propertyPath: automatic
@@ -422,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1459303452, guid: 3650985624c31c44f96259229864b239, type: 3}
       propertyPath: clipSize
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1459303452, guid: 3650985624c31c44f96259229864b239, type: 3}
       propertyPath: automatic
@@ -1052,6 +1052,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 805626097}
+    - target: {fileID: 7470686671394450583, guid: 5840f6286dbb0c44cb65c5026b788c04, type: 3}
+      propertyPath: m_Text
+      value: 1 - 1  The Beginning
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5840f6286dbb0c44cb65c5026b788c04, type: 3}
 --- !u!1 &2111835986 stripped

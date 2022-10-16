@@ -261,7 +261,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 0.9647059, b: 0.827451, a: 1}
     m_HighlightedColor: {r: 0.9764706, g: 0.65882355, b: 0.45882353, a: 1}
     m_PressedColor: {r: 0.9764706, g: 0.65882355, b: 0.45882353, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9568628, g: 0.64705884, b: 0.45098042, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -373,7 +373,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Lose!
+  m_Text: 'Defeated
 
 '
 --- !u!1 &7104527583403420327
@@ -525,6 +525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca1cb3277ea435468a4ddd264b98024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 7104527584134018945}
+  - {fileID: 1815655087268733424}
+  buttonDelay: 0.5
 --- !u!1 &7104527584134018954
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.1925964, y: -27.143}
+  m_AnchoredPosition: {x: -1.1925964, y: -38.8}
   m_SizeDelta: {x: -179.3786, y: -161.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7104527584134018958
@@ -627,7 +631,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 0.9647059, b: 0.827451, a: 1}
     m_HighlightedColor: {r: 0.9764706, g: 0.65882355, b: 0.45882353, a: 1}
     m_PressedColor: {r: 0.9764706, g: 0.65882355, b: 0.45882353, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.97647065, g: 0.65882355, b: 0.45882356, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

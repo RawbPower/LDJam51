@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject loseUI;
     public GameObject winUI;
+    public int levelsCompleted = 0;
     private int musicVolumeIndex = -1;
     private int sfxVolumeIndex = -1;
     private int screenSizeIndex = -1;
@@ -43,6 +45,8 @@ public class GameManager : MonoBehaviour
     {
         winUI.SetActive(true);
         winUI.GetComponent<WinMenu>().SetTimeString("Time: " + time.ToString("0.00"));
+        levelsCompleted = Mathf.Max(SceneManager.GetActiveScene().buildIndex - 1, levelsCompleted);
+        Debug.Log("Levels completed = " + levelsCompleted);
         PauseGame();
     }
 
