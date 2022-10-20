@@ -26,7 +26,7 @@ public class OptionsSettings : MonoBehaviour
                 sfx.initNumber = GameManager.instance.GetSFXVolumeIndex();
             }
 
-            if (GameManager.instance.GetScreenSizeIndex() >= 0)
+            /*if (GameManager.instance.GetScreenSizeIndex() >= 0)
             {
                 size.initIndex = GameManager.instance.GetScreenSizeIndex();
             }
@@ -34,13 +34,13 @@ public class OptionsSettings : MonoBehaviour
             if (GameManager.instance.GetFullScreenIndex() >= 0)
             {
                 fullscreen.isOn = Screen.fullScreen ? true : false;
-            }
+            }*/
         }
 
         music.UpdateLabel();
         sfx.UpdateLabel();
-        size.UpdateLabel();
-        fullscreen.isOn = Screen.fullScreen ? true : false;
+        //size.UpdateLabel();
+        //fullscreen.isOn = Screen.fullScreen ? true : false;
     }
 
    public void SaveOptionsSettings()
@@ -49,8 +49,8 @@ public class OptionsSettings : MonoBehaviour
         {
             GameManager.instance.SetMusicVolumeIndex(music.GetCurrentNumber());
             GameManager.instance.SetSFXVolumeIndex(sfx.GetCurrentNumber());
-            GameManager.instance.SetScreenSizeIndex(size.GetCurrentIndex());
-            GameManager.instance.SetFullScreenIndex(fullscreen.isOn ? 1 : 0);
+            //GameManager.instance.SetScreenSizeIndex(size.GetCurrentIndex());
+            //GameManager.instance.SetFullScreenIndex(fullscreen.isOn ? 1 : 0);
         }
     }
 

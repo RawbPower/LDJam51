@@ -6,13 +6,13 @@ using UnityEngine;
 public class FollowEnemyState : EnemyState
 {
 
-    private float slowDistance = 2.5f;
+    //private float slowDistance = 2.5f;
     private float _moveDirection;
     private float _distance;
     private Node _targetWaypoint;
     private Connection _targetConnection;
     int _targetIndex;
-    private bool jumpedToNode = false;
+    //private bool jumpedToNode = false;
 
     public FollowEnemyState(AIAgent agent) : base(agent)
     {
@@ -70,7 +70,7 @@ public class FollowEnemyState : EnemyState
                 if (enemyNode == _targetWaypoint)
                 {
                     _targetIndex++;
-                    jumpedToNode = false;
+                    //jumpedToNode = false;
                     // If target node is past the last node then return to idle state
                     if (_targetIndex >= _pathfindingAgent.path.Length)
                     {

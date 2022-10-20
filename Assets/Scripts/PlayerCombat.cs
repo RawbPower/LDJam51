@@ -146,7 +146,7 @@ public class PlayerCombat : MonoBehaviour
     void ChargeAttack()
     {
         //GetComponent<SpriteRenderer>().color = Color.red;
-        if (!charging)
+        if (!charging && weaponManager.GetEquipedWeapon() != null)
         {
             slowMo.DoSlowMo();
             GetComponent<AudioManager>().Play("Unsheath");
@@ -157,9 +157,12 @@ public class PlayerCombat : MonoBehaviour
 
     void ReleaseAttack()
     {
-        charging = false;
-        dashing = true;
-        StartCoroutine(Dash());
+        if (weaponManager.GetEquipedWeapon() != null)
+        {
+            charging = false;
+            dashing = true;
+            StartCoroutine(Dash());
+        }
     }
 
     IEnumerator Dash()
@@ -196,8 +199,11 @@ public class PlayerCombat : MonoBehaviour
         }
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
 
-        weaponManager.GetEquipedWeapon().Attack(aimDir);
-        yield return new WaitForSeconds(0.4f);
+        if (weaponManager.GetEquipedWeapon() != null)
+        {
+            weaponManager.GetEquipedWeapon().Attack(aimDir);
+            yield return new WaitForSeconds(0.4f);
+        }
         transform.rotation = Quaternion.identity;
         dashing = false;
         slashing = false;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProneEnemyState : EnemyState
 {
     private Vector2 _movementDirection;
-    private float _knockbackCounter;
+    //private float _knockbackCounter;
     private float _knockbackSpeed;
 
     public ProneEnemyState(AIAgent agent, Vector2 direction) : base(agent)
@@ -27,7 +27,7 @@ public class ProneEnemyState : EnemyState
     }
     public override void OnExitState()
     {
-        _knockbackCounter = 0.0f;
+        //_knockbackCounter = 0.0f;
     }
 
     public override void StateAnimation()

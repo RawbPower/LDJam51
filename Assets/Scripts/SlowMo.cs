@@ -29,6 +29,7 @@ public class SlowMo : MonoBehaviour
     private void Start()
     {
         timer = maxTime;
+        ResumeNormalSpeed();
     }
 
     public float GetTimeLeft()

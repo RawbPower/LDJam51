@@ -5,13 +5,13 @@ using UnityEngine;
 // Class for how an agent moves along path
 public class PathfindingAgent : MonoBehaviour
 {
-    private float slowDistance = 2.5f;
+    //private float slowDistance = 2.5f;
     private Vector2 _moveDirection;
     private float _distance;
     private Node _targetWaypoint;
     private Connection _targetConnection;
     int _targetIndex;
-    private bool jumpedToNode = false;
+    //private bool jumpedToNode = false;
 
     public PathfindingAgentInfo pathfindingInfo;
 
@@ -66,7 +66,7 @@ public class PathfindingAgent : MonoBehaviour
             if (enemyNode == _targetWaypoint)
             {
                 _targetIndex++;
-                jumpedToNode = false;
+                //jumpedToNode = false;
                 if (_targetIndex >= path.Length)
                 {
                     path = null;

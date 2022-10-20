@@ -24,7 +24,11 @@ public class Decoration : MonoBehaviour
                 Instantiate(particle.gameObject, transform.position, Quaternion.identity);
             }
 
-            animator.SetBool("Chop", true);
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == "Chop")
+                    animator.SetBool("Chop", true);
+            }
             chopped = true;
         }
     }

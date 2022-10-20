@@ -102,11 +102,13 @@ public class Bullet : MonoBehaviour
         }
         else
         {
+            float destroyDelay = 0.5f;
             if (explosion != null)
             {
                 Instantiate(explosion, transform.position, Quaternion.identity);
+                destroyDelay = 0.0f;
             }
-            Destroy(gameObject);
+            Destroy(gameObject, destroyDelay);
         }
     }
 
